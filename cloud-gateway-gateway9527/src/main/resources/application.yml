@@ -1,0 +1,41 @@
+server:
+  port: 9527
+
+spring:
+  application:
+    name: cloud-gateway
+  cloud:
+    gateway:
+      discovery:
+      routes:
+        - id: payment_route # 路由的id,没有规定规则但要求唯一,建议配合服务名
+          #匹配后提供服务的路由地址
+          #          uri: http://localhost:8001
+          uri: http://localhost:8001
+          predicates:
+            - Path=/payment/get/** # 断言，路径相匹配的进行路由
+              #- After=2017-01-20T17:42:47.789-07:00[America/Denver]
+              #- Before=2017-01-20T17:42:47.789-07:00[America/Denver]
+              #- Cookie=username,zzyy
+              #- Header=X-Request-Id, \d+ #请求头要有X-Request-Id属性，并且值为正数
+              #- Host=**.atguigu.com
+              #- Method=GET
+              #- Query=username, \d+ # 要有参数名username并且值还要是正整数才能路由
+              # 过滤
+            #filters:
+            #  - AddRequestHeader=X-Request-red, blue
+        - id: payment_route2
+          #          uri: http://localhost:8001
+          uri: http://localhost:8001
+          predicates:
+            Path=/payment/lb/** #断言,路径相匹配的进行路由
+eureka:
+  instance:
+    hostname: localhost #eureka服务端的实例
+    instance-id: cloud-gateway-service
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true #自己作为client需要注册到eureka中去
+    fetch-registry: true #ture表示需要从Eureka中抓取已有的信息 默认为true
+    service-url: #设置与eureka server交互的地址查询服务和注册服务都需要依赖这个地址
+      defaultZone: http://eureka7001.com:7001/eureka/
