@@ -64,4 +64,15 @@ public class OrderController {
             return new CommonResult<>(444, "操作失败！");
         }
     }
+
+    @GetMapping("/consumer/payment/zipKin")
+    public String getPayment() {
+        List<ServiceInstance> instances = this.eurekaDiscoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
+        if(null == instances || instances.size() == 0){
+            return null;
+        }
+        ServiceInstance serviceInstance = loadBalancer.instances(instances);
+        URI uri = serviceInstance.getUri();
+        return restTemplate.getForObject(uri + "/payment/zipKin", String.class);
+    }
 }

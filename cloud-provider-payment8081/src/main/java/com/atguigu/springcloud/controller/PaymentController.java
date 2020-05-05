@@ -92,4 +92,12 @@ public class PaymentController {
         return this.serverPort;
     }
 
+    //-----------------zipkin +slueth
+
+    @GetMapping(value = "/payment/zipKin")
+    public String paymentZipKin() {
+
+        return this.serverPort+"-----------i am zipkin slueth";
+    }
+
 }

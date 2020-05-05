@@ -1,0 +1,5 @@
+spring:
+  profiles:
+   # active: test  #文件的前缀 和开发环境 dev test  配置什么加载什么
+    # active: info  #文件的前缀 和开发环境 dev test  配置什么加载什么
+     active: dev  #文件的前缀 和开发环境 dev test  配置什么加载什么
