@@ -9,7 +9,7 @@ spring:
       label: master #分支
       name: config  #配置文件的名称
       profile: dev # 配置文件的后缀
-      #上述内容相当于读取 dev 分支上面的 config-dev.yml 文件
+      #上述内容相当于读取 label dev 分支上面的 config-dev.yml 文件
       uri: http://localhost:3344 #读取的是配置中心服务端的地址
   rabbitmq:
     host: 127.0.0.1
